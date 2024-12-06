@@ -5,3 +5,7 @@
 .containerContent {
   display: grid;
 }
+
+.initContentAccess {
+  padding: 1000px;
+}

@@ -2,6 +2,8 @@ export const initThemeToggle = () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeText = document.getElementById('theme-text');
+    
   
     // Check initial theme
     const setInitialTheme = () => {
@@ -19,11 +21,13 @@ export const initThemeToggle = () => {
       }
     };
   
+    
     // Initial theme setup
     setInitialTheme();
   
     // Theme toggle event listener
     themeToggleBtn.addEventListener('click', () => {
+        
       // Toggle icons
       themeToggleDarkIcon.classList.toggle('hidden');
       themeToggleLightIcon.classList.toggle('hidden');
@@ -32,9 +36,16 @@ export const initThemeToggle = () => {
       if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('color-theme', 'light');
+        themeText.textContent = 'light';
+        lightIcon.classList.remove('hidden');
       } else {
         document.documentElement.classList.add('dark');
         localStorage.setItem('color-theme', 'dark');
+        themeText.textContent = 'dark';
+        darkIcon.classList.remove('hidden');
       }
     });
+
   };
+
+

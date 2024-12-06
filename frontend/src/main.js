@@ -5,9 +5,13 @@ import ServicesRender from './pages/Servicios.js';
 import RenderContextForm from './components/FormContext.js';
 import ProyectosRender from './pages/Proyectos.js';
 import HomeRender from './pages/Inicio.js';
+import ContactRender from './pages/Contactos.js';
+import { initTongleMobile } from './helpers/mobileToggle.js';
+import cotizationContextEvent from './components/CotizationEvent.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // aca iniciamos el metodo para cambiar el modo de la pagina a dark o light
+  initTongleMobile()
   initThemeToggle();
 
   // Aca renderizamos un contenido inicial pues que seria el Inicio obviamente
@@ -21,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   HomeRender()
   ServicesRender();
   ProyectosRender()
+  ContactRender()
+  cotizationContextEvent()
   RenderContextForm.init();
 });
 
@@ -75,3 +81,4 @@ cerrarsesion.addEventListener('click',()=> {
   localStorage.clear()
   window.location.reload()
 })
+

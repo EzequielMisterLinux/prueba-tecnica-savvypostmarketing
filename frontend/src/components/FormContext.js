@@ -1,7 +1,7 @@
 import { Modal } from 'flowbite';
-import renderRegister from './elements/renderRegister';
-import renderPasswordRecovery from './elements/renderPasswordRecovery';
-import renderLogin from './elements/renderLogin';
+import renderRegister from './elementsLogin/renderRegister';
+import renderPasswordRecovery from './elementsLogin/renderPasswordRecovery';
+import renderLogin from './elementsLogin/renderLogin';
 
 const RenderContextForm = () => {
     let currentState = 'login';
