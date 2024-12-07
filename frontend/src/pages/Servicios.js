@@ -13,7 +13,7 @@ const ServicesRender = () => {
     return;
   }
 
-  // Create modal HTML template
+
   const createModalTemplate = (service) => `
     <div id="service-modal" tabindex="-1" class="hidden fixed inset-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto h-modal max-h-full">
       <div class="relative w-full max-w-2xl max-h-full">
@@ -76,7 +76,7 @@ const ServicesRender = () => {
                       </div>
                       <div class="col-span-2 sm:col-span-1">
                         <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="55 1234 5678" >
+                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="ejemplo: 50377774551" >
                       </div>
                       <div class="col-span-2">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electrónico</label>
@@ -105,10 +105,9 @@ const ServicesRender = () => {
   `;
 
   servicesLink.addEventListener("click", () => {
-    // Clear previous content
+    
     contentArea.innerHTML = '';
 
-    // Create responsive services grid
     const servicesGrid = document.createElement('div');
     servicesGrid.className = 'container mx-auto px-4 py-8';
     servicesGrid.innerHTML = `

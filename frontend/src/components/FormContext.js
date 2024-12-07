@@ -9,7 +9,7 @@ const RenderContextForm = () => {
     let currentState = 'login';
     let modal = null;
 
-    // Validation Utility Functions
+
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
@@ -58,20 +58,27 @@ const RenderContextForm = () => {
         }
         
         if (requireComplex) {
-            const passwordComplexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordComplexityRegex.test(password)) {
+
+            const hasLowercase = /[a-z]/.test(password);
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[@$!%*?&]/.test(password);
+            const isLongEnough = password.length >= 8;
+        
+            const missingRequirements = [];
+        
+            if (!hasLowercase) missingRequirements.push('Al menos una letra minúscula');
+            if (!hasUppercase) missingRequirements.push('Al menos una letra mayúscula');
+            if (!hasNumber) missingRequirements.push('Al menos un número');
+            if (!hasSpecialChar) missingRequirements.push('Al menos un carácter especial (@$!%*?&)');
+            if (!isLongEnough) missingRequirements.push('Al menos 8 caracteres');
+        
+            if (missingRequirements.length > 0) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Contraseña Débil',
-                    html: `
-                        La contraseña debe contener:
-                        <ul style="text-align: left; padding-left: 20px;">
-                            <li>Al menos una letra mayúscula</li>
-                            <li>Al menos una letra minúscula</li>
-                            <li>Al menos un número</li>
-                            <li>Al menos un carácter especial (@$!%*?&)</li>
-                        </ul>
-                    `,
+                    html: `La contraseña debe contener:<br>` + 
+                          missingRequirements.map(req => `• ${req}`).join('<br>'),
                     confirmButtonColor: '#14b8a6'
                 });
                 return false;
@@ -152,7 +159,7 @@ const RenderContextForm = () => {
     };
 
     const setupEventListeners = () => {
-        // Close Modal Buttons
+
         const closeModalBtns = document.querySelectorAll('#closeModal');
         closeModalBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -163,7 +170,7 @@ const RenderContextForm = () => {
             });
         });
 
-        // Switch to Register
+
         const switchToRegisterBtn = document.getElementById('switchToRegister');
         if (switchToRegisterBtn) {
             switchToRegisterBtn.addEventListener('click', () => {
@@ -172,7 +179,7 @@ const RenderContextForm = () => {
             });
         }
 
-        // Switch to Login
+
         const switchToLoginBtns = document.querySelectorAll('#switchToLogin');
         switchToLoginBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -181,7 +188,7 @@ const RenderContextForm = () => {
             });
         });
 
-        // Forgot Password
+
         const forgotPasswordBtn = document.getElementById('forgotPassword');
         if (forgotPasswordBtn) {
             forgotPasswordBtn.addEventListener('click', () => {
@@ -190,7 +197,7 @@ const RenderContextForm = () => {
             });
         }
 
-        // Login Form
+
         const loginForm = document.getElementById('loginForm');
         if (loginForm) {
             loginForm.addEventListener('submit', async(e) => {
@@ -198,13 +205,11 @@ const RenderContextForm = () => {
                 const email = document.getElementById('emailLogin').value.trim();
                 const password = document.getElementById('passwordLogin').value;
 
-                // Validate Email
+
                 if (!validateEmail(email)) return;
 
-                // Validate Password (basic validation)
                 if (!validatePassword(password)) return;
 
-                // Simulate login (replace with actual authentication logic)
                 console.log('Login submitted', { email, password });
 
                 const data = {
@@ -225,28 +230,22 @@ const RenderContextForm = () => {
             });
         }
 
-        // Register Form
         const registerForm = document.getElementById('registerForm');
         if (registerForm) {
             registerForm.addEventListener('submit', async(e) => {
                 e.preventDefault();
                 
-                // Get form values
                 const name = document.getElementById('nameRegister').value.trim();
                 const email = document.getElementById('registerEmail').value.trim();
                 const passwordRegister = document.getElementById('registerPasswordEvento').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
 
-                // Validate Name
                 if (!validateName(name)) return;
 
-                // Validate Email
                 if (!validateEmail(email)) return;
 
-                // Validate Password with complexity
                 if (!validatePassword(passwordRegister, true)) return;
 
-                // Validate Password Confirmation
                 if (!confirmPassword) {
                     Swal.fire({
                         icon: 'error',
@@ -267,23 +266,21 @@ const RenderContextForm = () => {
                     return;
                 }
 
-                // If all validations pass
                 const userData = {
-                    name,
-                    email,
-                    passwordRegister
+                    name:name,
+                    email:email,
+                    password:passwordRegister
                 };
                 
                 const userDataLogged = {
-                    email,
-                    passwordRegister
+                    email:email,
+                    password:passwordRegister
                 }
 
                 await registerUserApi(userData)
 
                 console.log('Datos de Registro:', userData);
                 
-                // Simulate registration (replace with actual registration logic)
                 Swal.fire({
                     icon: 'success',
                     title: '¡Cuenta Creada!',
@@ -293,19 +290,16 @@ const RenderContextForm = () => {
 
                 await LoginUserAccess(userDataLogged)
                 
-                // Reset form
                 e.target.reset();
             });
         }
 
-        // Password Recovery Form
         const passwordRecoveryForm = document.getElementById('passwordRecoveryForm');
         if (passwordRecoveryForm) {
             passwordRecoveryForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = document.getElementById('recoveryEmail').value.trim();
 
-                // Validate Email
                 if (!validateEmail(email)) return;
 
                 console.log('Password recovery submitted', { email });

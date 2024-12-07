@@ -160,7 +160,7 @@ return heroSection.innerHTML;
       .openPopup();
   };
   
-  // Add this to your existing script after rendering content
+
   requestAnimationFrame(() => {
     const mapElement = document.getElementById('map');
     if (mapElement) {

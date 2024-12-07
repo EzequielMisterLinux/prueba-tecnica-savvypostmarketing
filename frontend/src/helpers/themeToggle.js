@@ -5,7 +5,7 @@ export const initThemeToggle = () => {
     const themeText = document.getElementById('theme-text');
     
   
-    // Check initial theme
+
     const setInitialTheme = () => {
       const isDarkMode = localStorage.getItem('color-theme') === 'dark' || 
         (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -22,17 +22,13 @@ export const initThemeToggle = () => {
     };
   
     
-    // Initial theme setup
     setInitialTheme();
   
-    // Theme toggle event listener
     themeToggleBtn.addEventListener('click', () => {
         
-      // Toggle icons
       themeToggleDarkIcon.classList.toggle('hidden');
       themeToggleLightIcon.classList.toggle('hidden');
   
-      // Toggle theme
       if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('color-theme', 'light');
