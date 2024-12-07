@@ -6,6 +6,7 @@ dotenv.configDotenv()
 let connectionUrl = "mongodb+srv://ezequielcampos:Vv1bbyDGL9h0bowT@cluster0.06meydb.mongodb.net/pruebaTecnicaFerre?retryWrites=true&w=majority&appName=Cluster0"
 
 
+
 const MongoConnection = async () => {
     
     try {

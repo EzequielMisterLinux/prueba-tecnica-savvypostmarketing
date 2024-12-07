@@ -1,5 +1,38 @@
 # Prueba Técnica - Savvy Post Marketing
 
+![YouTube Presentation](https://img.shields.io/badge/YouTube-Presentation-red?logo=youtube&logoColor=white&style=flat-square)
+
+## 🎥 Video de Presentación
+
+Haz clic en el siguiente enlace para ver una presentación completa del proyecto en YouTube:  
+[Ver presentación en YouTube](https://youtu.be/cQqeqWqn84I?si=_Ti12QuN9KS1UFrR)
+
+---
+
+## 🔧 Tecnologías Utilizadas
+
+Este proyecto fue desarrollado utilizando una combinación de tecnologías modernas para garantizar un rendimiento óptimo y una experiencia de usuario de calidad. Las principales tecnologías utilizadas incluyen:
+
+### Frontend
+- **Vanilla JavaScript**: Para la lógica del cliente.
+- **Vite**: Herramienta de construcción rápida para desarrollo web.
+- **HTML y CSS**: Para la estructura y el estilo básico del proyecto.
+- **TailwindCSS**: Framework CSS para diseños rápidos y responsivos.
+- **SweetAlert2**: Librería para notificaciones y alertas atractivas.
+
+### Backend
+- **Node.js**: Entorno de ejecución para JavaScript en el servidor.
+- **Express.js**: Framework minimalista para crear API y manejar peticiones HTTP.
+- **JWT (jsonwebtoken)**: Para la autenticación basada en tokens.
+
+### Base de Datos
+- **MongoDB**: Base de datos NoSQL para el almacenamiento de datos escalable.
+
+### Utilidades y Otras Librerías
+- **Axios**: Para realizar solicitudes HTTP.
+
+---
+
 Este repositorio contiene la solución para la prueba técnica de **Savvy Post Marketing**. A continuación, se detallan los pasos para clonar, configurar y ejecutar el proyecto.
 
 ## Requisitos previos
@@ -93,4 +126,14 @@ http://localhost:5173
 - Si experimentas problemas, revisa los logs en la terminal para identificar posibles configuraciones faltantes.
 
 ---
+
+## ✨ Autor
+[Ezequiel Campos](https://github.com/EzequielMisterLinux)  
+Desarrollador apasionado por la creación de aplicaciones web modernas.
+
+---
+
+## 🛡️ Licencia
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+
 
