@@ -3,6 +3,7 @@ import renderRegister from './elementsLogin/renderRegister';
 import renderPasswordRecovery from './elementsLogin/renderPasswordRecovery';
 import renderLogin from './elementsLogin/renderLogin';
 import Swal from 'sweetalert2';
+import {LoginUserAccess, registerUserApi} from '../api/loginAndRegister';
 
 const RenderContextForm = () => {
     let currentState = 'login';
@@ -192,7 +193,7 @@ const RenderContextForm = () => {
         // Login Form
         const loginForm = document.getElementById('loginForm');
         if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
+            loginForm.addEventListener('submit', async(e) => {
                 e.preventDefault();
                 const email = document.getElementById('emailLogin').value.trim();
                 const password = document.getElementById('passwordLogin').value;
@@ -205,6 +206,16 @@ const RenderContextForm = () => {
 
                 // Simulate login (replace with actual authentication logic)
                 console.log('Login submitted', { email, password });
+
+                const data = {
+                    email: email,
+                    password: password
+                  }
+                
+                await LoginUserAccess(data)
+
+
+
                 Swal.fire({
                     icon: 'success',
                     title: '¡Inicio de Sesión!',
@@ -223,7 +234,7 @@ const RenderContextForm = () => {
                 // Get form values
                 const name = document.getElementById('nameRegister').value.trim();
                 const email = document.getElementById('registerEmail').value.trim();
-                const password = document.getElementById('registerPassword').value;
+                const passwordRegister = document.getElementById('registerPasswordEvento').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
 
                 // Validate Name
@@ -233,7 +244,7 @@ const RenderContextForm = () => {
                 if (!validateEmail(email)) return;
 
                 // Validate Password with complexity
-                if (!validatePassword(password, true)) return;
+                if (!validatePassword(passwordRegister, true)) return;
 
                 // Validate Password Confirmation
                 if (!confirmPassword) {
@@ -246,7 +257,7 @@ const RenderContextForm = () => {
                     return;
                 }
 
-                if (password !== confirmPassword) {
+                if (passwordRegister !== confirmPassword) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Contraseñas No Coinciden',
@@ -260,13 +271,15 @@ const RenderContextForm = () => {
                 const userData = {
                     name,
                     email,
-                    password
+                    passwordRegister
                 };
                 
                 const userDataLogged = {
                     email,
-                    password
+                    passwordRegister
                 }
+
+                await registerUserApi(userData)
 
                 console.log('Datos de Registro:', userData);
                 
@@ -277,6 +290,8 @@ const RenderContextForm = () => {
                     text: 'Tu cuenta ha sido creada exitosamente',
                     confirmButtonColor: '#14b8a6'
                 });
+
+                await LoginUserAccess(userDataLogged)
                 
                 // Reset form
                 e.target.reset();

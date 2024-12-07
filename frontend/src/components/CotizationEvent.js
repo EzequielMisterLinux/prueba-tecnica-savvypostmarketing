@@ -6,7 +6,7 @@ const cotizationContextEvent =() => {
     let isLoggedStatus = localStorage.getItem("token")
     let cotizationEvent = document.getElementById("cotizationEvent")
 
-    cotizationEvent.innerHTML = (isLoggedStatus === "true") ? `      
+    cotizationEvent.innerHTML = (isLoggedStatus) ? `      
     <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Modal header -->
