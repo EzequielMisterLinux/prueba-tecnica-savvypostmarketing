@@ -29,7 +29,7 @@ export const services = [
       description: "Protección integral contra filtraciones y humedad.",
       detailedDescription: "Aplicamos tratamientos especializados para sellar y proteger tu techo contra la humedad y las inclemencias del tiempo.",
       price: "Desde $3,000",
-      image: "https://s3.eu-1.blufs.ir/aradbranding-en-uploads/topics/16756895539466.jpg"
+      image: "https://s3.eu-1.blufs.ir/aradbranding-en-uploads/topics/16756895539466.jpg    "
     },
     {
       id: 5,
@@ -37,7 +37,7 @@ export const services = [
       description: "Consultoría profesional para proyectos de techado.",
       detailedDescription: "Ofrecemos asesoramiento técnico personalizado para elegir los mejores materiales y soluciones para tu proyecto.",
       price: "Consultar",
-      image: "/images/img5.png"
+      image: "https://s11.stc.yc.kpcdn.net/share/i/12/11877041/wr-960.webp"
     },
     {
       id: 6,
@@ -45,6 +45,6 @@ export const services = [
       description: "Amplio catálogo de materiales para techado.",
       detailedDescription: "Contamos con una amplia variedad de materiales de construcción, tejas, impermeabilizantes y herramientas especializadas.",
       price: "Precios variables",
-      image: "/images/img6.png"
+      image: "https://www.renewcanada.net/wp-content/uploads/2018/06/roof-under-construction.jpg"
     }
   ];

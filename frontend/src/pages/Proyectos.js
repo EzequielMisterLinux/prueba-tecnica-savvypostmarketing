@@ -1,6 +1,7 @@
 const ProyectosRender = () => {
     const proyectosLink = document.getElementById("proyectos");
     const contentArea = document.getElementById("content");
+    
   
     if (!proyectosLink || !contentArea) {
       console.error("Required elements not found");

@@ -35,7 +35,7 @@ const changeHeroImage = () => {
   setTimeout(() => {
     heroBackground.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
     heroBackground.classList.remove('opacity-0');
-  }, 800);
+  }, 500);
 };
 
 const startSlider = () => {

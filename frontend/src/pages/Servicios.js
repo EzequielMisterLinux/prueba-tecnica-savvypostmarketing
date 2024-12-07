@@ -1,9 +1,11 @@
+import Swal from "sweetalert2";
 import { services } from "./utils/dataServices";
 import { Modal } from "flowbite";
 
 const ServicesRender = () => {
   const servicesLink = document.getElementById("servicios");
   const contentArea = document.getElementById("content");
+  
   const modalContainer = document.getElementById("services-modal-container");
 
   if (!servicesLink || !contentArea || !modalContainer) {
@@ -57,11 +59,11 @@ const ServicesRender = () => {
                       <span class="sr-only">Cerrar modal</span>
                     </button>
                   </div>
-                  <form class="p-4 md:p-5">
+                  <form id="consultation-form-service" class="p-4 md:p-5">
                     <div class="grid gap-4 mb-4 grid-cols-2">
                       <div class="col-span-2">
                         <label for="service-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Servicio de Interés</label>
-                        <select id="service-type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        <select id="service-type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
                           <option value="">Selecciona un servicio</option>
                           ${services.map(service => `
                             <option value="${service.id}">${service.title}</option>
@@ -70,15 +72,15 @@ const ServicesRender = () => {
                       </div>
                       <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Completo</label>
-                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tu nombre" required>
+                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tu nombre" >
                       </div>
                       <div class="col-span-2 sm:col-span-1">
                         <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="55 1234 5678" required>
+                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="55 1234 5678" >
                       </div>
                       <div class="col-span-2">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electrónico</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="tu.correo@ejemplo.com" required>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="tu.correo@ejemplo.com" >
                       </div>
                       <div class="col-span-2">
                         <label for="project-details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Detalles del Proyecto</label>
@@ -140,6 +142,8 @@ const ServicesRender = () => {
       
     `;
 
+    
+
     contentArea.appendChild(servicesGrid);
 
     document.querySelectorAll(".service-card").forEach((card) => {
@@ -162,6 +166,95 @@ const ServicesRender = () => {
           modal2.show()
           modalContainer.querySelectorAll(".close-modal").forEach((btn) => {
             btn.addEventListener("click", () => modal2.hide());
+            
+            const consultationForm = document.getElementById('consultation-form-service');
+          
+          
+            consultationForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              
+              const service = document.getElementById('service-type').value;
+              const name = document.getElementById('name').value.trim();
+              const phone = document.getElementById('phone').value.trim();
+              const email = document.getElementById('email').value.trim();
+              const consult = document.getElementById('project-details').value;
+
+              if (!service) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Por favor, selecciona un servicio',
+                  confirmButtonColor: '#14b8a6'
+                });
+                return;
+              }
+          
+                  if (!name) {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Por favor, ingresa tu nombre',
+                      confirmButtonColor: '#14b8a6'
+                    });
+                    return;
+                  }
+              
+                  if (!phone) {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Por favor, ingresa tu número de teléfono',
+                      confirmButtonColor: '#14b8a6'
+                    });
+                    return;
+                  }
+              
+                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                  if (!email || !emailRegex.test(email)) {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Por favor, ingresa un correo electrónico válido',
+                      confirmButtonColor: '#14b8a6'
+                    });
+                    return;
+                  }
+              
+
+                  if (!consult) {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Por favor, ingrese su consulta',
+                      confirmButtonColor: '#14b8a6'
+                    });
+                    return;
+                  }
+              
+                  const formData = {
+                    service,
+                    name,
+                    phone,
+                    email,
+                    consult
+                  };
+              
+                  console.log('Consultation Request:', formData);
+                  
+                  Swal.fire({
+                    icon: 'success',
+                    title: '¡Consulta Programada!',
+                    text: 'Tu consulta ha sido programada exitosamente',
+                    confirmButtonColor: '#14b8a6'
+                  });
+          
+              
+              
+              modal2.hide();
+              consultationForm.reset();
+            });
+          
+
           });
         });
       });
